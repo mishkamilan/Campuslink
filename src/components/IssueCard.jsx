@@ -1,4 +1,4 @@
-import { STATUS, getSolutions } from "../store";
+import { STATUS, CATEGORIES, getSolutions } from "../store";
 import Tracker from "./Tracker";
 
 export default function IssueCard({ issue, children }) {
@@ -13,7 +13,7 @@ export default function IssueCard({ issue, children }) {
       </div>
       <p>{issue.description}</p>
       <p className="meta">
-        📍 {issue.location || "Location not given"} &nbsp;·&nbsp; 👤 {issue.createdByName}
+        🏷️ {CATEGORIES[issue.category] || "Other"} &nbsp;·&nbsp; 📍 {issue.location || "Location not given"} &nbsp;·&nbsp; 👤 {issue.createdByName}
         {issue.evidenceLink && <> &nbsp;·&nbsp; <a href={issue.evidenceLink} target="_blank" rel="noreferrer">Evidence</a></>}
       </p>
       <Tracker status={issue.status} />

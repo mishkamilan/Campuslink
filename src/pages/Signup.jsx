@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { addUser } from "../store";
+import { addUser, CATEGORIES } from "../store";
 
 export default function Signup() {
-  const [form, setForm] = useState({ name: "", email: "", password: "", role: "student" });
+  const [form, setForm] = useState({ name: "", email: "", password: "", role: "student", sector: "all" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -12,7 +12,9 @@ export default function Signup() {
   function submit(e) {
     e.preventDefault();
     if (!form.name || !form.email || !form.password) return setError("Please fill all fields.");
-    const user = addUser({ ...form, email: form.email.trim() });
+    const data = { ...form, email: form.email.trim() };
+    if (data.role !== "industry") delete data.sector;
+    const user = addUser(data);
     if (!user) return setError("This email is already registered.");
     navigate("/" + user.role);
   }
@@ -31,6 +33,15 @@ export default function Signup() {
           <option value="faculty">Faculty</option>
           <option value="industry">Industry / Expert</option>
         </select>
+
+        {form.role === "industry" && (
+          <select className="input" value={form.sector} onChange={set("sector")}>
+            <option value="all">All sectors (see every problem)</option>
+            {Object.entries(CATEGORIES).filter(([k]) => k !== "other").map(([key, label]) => (
+              <option key={key} value={key}>{label}</option>
+            ))}
+          </select>
+        )}
         {error && <div className="error">{error}</div>}
 
         <button className="btn full" type="submit">Sign up</button>

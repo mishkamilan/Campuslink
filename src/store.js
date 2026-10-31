@@ -12,19 +12,31 @@ export const STATUS = {
   rejected: { label: "Rejected", color: "#dc2626" },
 };
 
+export const CATEGORIES = {
+  water: "Water",
+  waste: "Waste management",
+  energy: "Energy",
+  ewaste: "E-waste",
+  other: "Other",
+};
+
 // ---------- demo data (created only the first time) ----------
 function seed() {
   if (read("users", null)) return;
   write("users", [
     { name: "Demo Student", email: "student@demo.com", password: "123456", role: "student" },
     { name: "Prof. Sharma", email: "faculty@demo.com", password: "123456", role: "faculty" },
-    { name: "GreenTech Ltd", email: "industry@demo.com", password: "123456", role: "industry" },
+    { name: "GreenTech Ltd", email: "industry@demo.com", password: "123456", role: "industry", sector: "all" },
+    { name: "AquaPure Water Technologies", email: "water@demo.com", password: "123456", role: "industry", sector: "water" },
+    { name: "EcoCycle E-Waste Recyclers", email: "ewaste@demo.com", password: "123456", role: "industry", sector: "ewaste" },
   ]);
   const by = { createdBy: "student@demo.com", createdByName: "Demo Student" };
   write("issues", [
-    { id: 1, title: "Groundwater contamination near campus housing", description: "Informal battery waste disposal is polluting the borewell water.", location: "Hostel Block B", evidenceLink: "", status: "posted", ...by },
-    { id: 2, title: "Overflowing waste bins near the main gate", description: "Bins are not cleared for days, causing a health hazard.", location: "Main Gate", evidenceLink: "", status: "verified", ...by },
-    { id: 3, title: "High electricity use in library at night", description: "Lights and AC stay on after closing hours.", location: "Central Library", evidenceLink: "", status: "closed", ...by },
+    { id: 1, title: "Groundwater contamination near campus housing", description: "Informal battery waste disposal is polluting the borewell water.", location: "Hostel Block B", evidenceLink: "", category: "water", status: "posted", ...by },
+    { id: 2, title: "Overflowing waste bins near the main gate", description: "Bins are not cleared for days, causing a health hazard.", location: "Main Gate", evidenceLink: "", category: "waste", status: "verified", ...by },
+    { id: 3, title: "High electricity use in library at night", description: "Lights and AC stay on after closing hours.", location: "Central Library", evidenceLink: "", category: "energy", status: "closed", ...by },
+    { id: 4, title: "No e-waste collection point on campus", description: "Old chargers and batteries go into normal dustbins.", location: "Engineering Block", evidenceLink: "", category: "ewaste", status: "verified", ...by },
+    { id: 5, title: "Leaking taps in academic block washrooms", description: "Taps leak all day and waste hundreds of litres every week.", location: "Academic Block", evidenceLink: "", category: "water", status: "verified", ...by },
   ]);
   write("solutions", []);
 }

@@ -1,11 +1,13 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import IssueCard from "../components/IssueCard";
-import { addIssue, getCurrentUser, getIssues } from "../store";
+import { addIssue, getCurrentUser, getIssues, CATEGORIES } from "../store";
+
+const EMPTY = { title: "", description: "", location: "", evidenceLink: "", category: "water" };
 
 export default function StudentDashboard() {
   const user = getCurrentUser();
-  const [form, setForm] = useState({ title: "", description: "", location: "", evidenceLink: "" });
+  const [form, setForm] = useState(EMPTY);
   const [issues, setIssues] = useState(getIssues().filter((i) => i.createdBy === user.email));
 
   const set = (key) => (e) => setForm({ ...form, [key]: e.target.value });
@@ -16,7 +18,7 @@ export default function StudentDashboard() {
     if (!form.title || !form.description) return alert("Please add a title and description.");
     addIssue(form);
     setIssues(getIssues().filter((i) => i.createdBy === user.email));
-    setForm({ title: "", description: "", location: "", evidenceLink: "" });
+    setForm(EMPTY);
   }
 
   return (
@@ -36,6 +38,11 @@ export default function StudentDashboard() {
         <form className="card" onSubmit={submit}>
           <h3>Post a societal problem</h3>
           <input className="input" placeholder="Problem title" value={form.title} onChange={set("title")} />
+          <select className="input" value={form.category} onChange={set("category")}>
+            {Object.entries(CATEGORIES).map(([key, label]) => (
+              <option key={key} value={key}>{label}</option>
+            ))}
+          </select>
           <textarea className="input" placeholder="Describe the problem" value={form.description} onChange={set("description")} />
           <input className="input" placeholder="Location (e.g. Hostel Block B)" value={form.location} onChange={set("location")} />
           <input className="input" placeholder="Evidence link (photo or document URL)" value={form.evidenceLink} onChange={set("evidenceLink")} />
