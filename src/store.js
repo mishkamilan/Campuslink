@@ -2,7 +2,16 @@ const read = (key, fallback) => {
   try { return JSON.parse(localStorage.getItem(key)) ?? fallback; }
   catch { return fallback; }
 };
-const write = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+
+// returns true if saved, false if the browser storage is full
+const write = (key, value) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch {
+    return false;
+  }
+};
 
 export const STATUS = {
   posted: { label: "Pending review", color: "#64748b" },
@@ -61,10 +70,12 @@ export const logout = () => localStorage.removeItem("current");
 
 // ---------- issues ----------
 export const getIssues = () => read("issues", []);
+
+// returns true if saved, false if storage is full
 export function addIssue(data) {
   const user = getCurrentUser();
   const issue = { id: Date.now(), status: "posted", createdBy: user.email, createdByName: user.name, ...data };
-  write("issues", [issue, ...getIssues()]);
+  return write("issues", [issue, ...getIssues()]);
 }
 export function updateIssue(id, patch) {
   write("issues", getIssues().map((i) => (i.id === id ? { ...i, ...patch } : i)));
