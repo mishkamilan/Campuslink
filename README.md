@@ -1,16 +1,34 @@
-# React + Vite
+# CampusLink
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A university-industry platform to crowdsource and solve societal challenges.
 
-Currently, two official plugins are available:
+## Problem
+Students notice real-world issues (waste, water quality, energy use), but most never reach industry solvers.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## How it works
+Post → Verify → Discover → Solve → Track
 
-## React Compiler
+## Roles
+- **Student:** posts a problem with location and evidence
+- **Faculty:** verifies the problem (approve or reject) and closes it
+- **Industry:** browses verified problems and offers a solution
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech stack
+React, Vite, React Router, browser local storage
 
-## Expanding the Oxlint configuration
+## Demo accounts (password: 123456)
+- student@demo.com
+- faculty@demo.com
+- industry@demo.com
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Run locally
+npm install
+npm run dev
+
+## Team
+- Mishka Milan Singh (S26CSEU2710)
+- Pragna Dhamija (S26CSEU2781)
+- Lavanya Tyagi (S26CSEU2687)
+- Arnav Tyagi (S26CSEU2696)
+
+Course: 2026CSAE102 Technology and Sustainability
