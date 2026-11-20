@@ -30,5 +30,7 @@ npm run dev
 - Pragna Dhamija (S26CSEU2781)
 - Lavanya Tyagi (S26CSEU2687)
 - Arnav Tyagi (S26CSEU2696)
+- Vidhi Khandelwal (S26CSE3642)
+- Dakshit Sharma (S26CSE3628)
 
 Course: 2026CSAE102 Technology and Sustainability
